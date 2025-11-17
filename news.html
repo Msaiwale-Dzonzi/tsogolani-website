@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News & Events - Tsogolani Investment</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#f7f7f7;}
+header { background:#003366; color:white; padding:20px; text-align:center; }
+header nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
+header nav a.active { text-decoration:underline; }
+
+.news-section { padding:40px 5%; }
+.news-card { background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); margin-bottom:30px; overflow:hidden; cursor:pointer; transition:0.3s; }
+.news-card:hover { transform: scale(1.02); }
+.news-card-content { padding:15px; }
+.news-card-content h3 { color:#003366; margin:0 0 10px; }
+.news-card-content p { font-size:14px; color:#555; }
+.news-card-content a { display:inline-block; margin-top:10px; color:#0078ff; text-decoration:none; font-weight:bold; }
+.news-card-content a:hover { text-decoration:underline; }
+
+.modal { display:none; position:fixed; z-index:10000; left:0; top:0; width:100%; height:100%; overflow-y:auto; background-color: rgba(0,0,0,0.7); padding-top:30px; }
+.modal-content { background:#fff; margin:auto; padding:20px; border-radius:15px; width:80%; max-width:900px; position:relative; }
+.close { position:absolute; right:20px; top:10px; font-size:28px; cursor:pointer; color:#333; }
+
+.swiper { width:100%; height:400px; border-radius:12px; margin-top:15px; }
+.swiper-slide img, .swiper-slide video { width:100%; height:400px; object-fit:cover; border-radius:12px; }
+
+.next-prev { display:flex; justify-content:flex-end; margin-top:15px; }
+.next-prev button { padding:10px 20px; border:none; background:#003366; color:white; border-radius:8px; cursor:pointer; }
+.next-prev button:hover { background:#0055aa; }
+
+footer { background:#003366; color:white; padding:20px; text-align:center; margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Tsogolani Investment & Estate Agents</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="news.html" class="active">News & Events</a>
+    </nav>
+</header>
+
+<section class="news-section">
+    <h2>Latest News & Events</h2>
+
+    <!-- News Item 1 -->
+    <div class="news-card" data-news="news1">
+        <div class="news-card-content">
+            <h3>Grand Opening of Residential Project</h3>
+            <p>Modern homes in Lilongwe are now available. Explore the project gallery and videos.</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+    </div>
+
+    <!-- News Item 2 -->
+    <div class="news-card" data-news="news2">
+        <div class="news-card-content">
+            <h3>Workshop on Sustainable Construction</h3>
+            <p>Learn eco-friendly construction methods and innovations from our recent workshop.</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+    </div>
+
+    <!-- News Item 3 -->
+    <div class="news-card" data-news="news3">
+        <div class="news-card-content">
+            <h3>Property Valuation Campaign</h3>
+            <p>We conducted property valuation for new investors and clients.</p>
+            <a href="#" class="read-more">Read More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Template -->
+<div class="modal" id="modal-template">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-desc"></p>
+
+        <div class="swiper" id="modal-swiper">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                <!-- Images/videos dynamically loaded here -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+        <div class="next-prev">
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Tsogolani Investment & Estate Agents</p>
+    <p>
+        Follow us:
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// Define local media for each news
+const newsMedia = {
+    news1: {
+        title: "Grand Opening of Residential Project",
+        desc: "We launched our latest residential housing project in Lilongwe with modern homes and apartments.",
+        images: ["assets/images/news1/img1.jpg","assets/images/news1/img2.jpg"],
+        videos: ["assets/videos/news1/vid1.mp4","assets/videos/news1/vid2.mp4"]
+    },
+    news2: {
+        title: "Workshop on Sustainable Construction",
+        desc: "Eco-friendly construction workshop held with contractors and project managers.",
+        images: ["assets/images/news2/img1.jpg","assets/images/news2/img2.jpg"],
+        videos: ["assets/videos/news2/vid1.mp4"]
+    },
+    news3: {
+        title: "Property Valuation Campaign",
+        desc: "We conducted property valuation for clients and investors in Lilongwe.",
+        images: ["assets/images/news3/img1.jpg"],
+        videos: ["assets/videos/news3/vid1.mp4"]
+    }
+};
+
+let swiperInstance;
+
+// Open modal dynamically
+document.querySelectorAll('.read-more').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const newsId = link.closest('.news-card').dataset.news;
+        const modal = document.getElementById('modal-template');
+
+        document.getElementById('modal-title').textContent = newsMedia[newsId].title;
+        document.getElementById('modal-desc').textContent = newsMedia[newsId].desc;
+
+        const wrapper = document.getElementById('swiper-wrapper');
+        wrapper.innerHTML = ''; // clear previous slides
+
+        newsMedia[newsId].images.forEach(img => {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = `<img src="${img}" alt="">`;
+            wrapper.appendChild(slide);
+        });
+
+        newsMedia[newsId].videos.forEach(video => {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = `<video controls><source src="${video}" type="video/mp4">Your browser does not support video.</video>`;
+            wrapper.appendChild(slide);
+        });
+
+        modal.style.display = 'block';
+
+        if(swiperInstance) swiperInstance.destroy();
+        swiperInstance = new Swiper('#modal-swiper', {
+            pagination: { el: '.swiper-pagination', clickable: true },
+            loop: true
+        });
+    });
+});
+
+// Close modal
+document.querySelector('.close').addEventListener('click', () => {
+    closeModal();
+});
+
+function closeModal() {
+    document.getElementById('modal-template').style.display = 'none';
+}
+</script>
+
+</body>
+</html>
