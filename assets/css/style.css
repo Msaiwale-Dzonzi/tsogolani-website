@@ -1,0 +1,210 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #003366;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+header .logo {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.hero {
+    background: url('../images/hero.jpg') center/cover no-repeat;
+    color: black;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+
+.btn {
+    display: inline-block;
+    background: #ffcc00;
+    color: #003366;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    background: #e6e6e6;
+}
+
+.features div {
+    width: 30%;
+    text-align: center;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+}
+
+.project {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-left: 5px solid #003366;
+    background: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+
+form input, form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center; /* centers text horizontally */
+    padding: 20px;
+}
+
+footer a {
+    color: #ffcc00;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+/* Optional: spacing between lines */
+footer p {
+    margin: 5px 0;
+}
+
+
+header {
+    background-color: #003366;
+    padding: 10px 20px;
+    position: relative;
+}
+
+header .logo {
+    width: 120px;
+    display: block;
+}
+
+/* Center the nav below the logo */
+header nav {
+    text-align: center;
+    margin-top: 10px;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+header nav a.active {
+    text-decoration: underline;
+}
+
+.services-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap; /* makes it responsive */
+    margin-top: 20px;
+}
+
+.service-column {
+    flex: 1; /* columns will share space equally */
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.service-column h3 {
+    color: #003366;
+    margin-bottom: 15px;
+}
+
+.service-column ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+/* Responsive: stack columns on small screens */
+@media screen and (max-width: 768px) {
+    .services-container {
+        flex-direction: column;
+    }
+}
+
+/* Responsive for small screens */
+@media screen and (max-width: 768px) {
+    header nav a {
+        display: block;
+        margin: 5px 0;
+    }
+
+
+@media screen and (max-width: 768px) {
+    .features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero {
+        padding: 60px 20px;
+    }
+}
