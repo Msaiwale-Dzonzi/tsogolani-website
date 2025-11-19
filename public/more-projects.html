@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>More Projects - Tsogolani Investment</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <img src="assets/images/logo.png" alt="Tsogolani Logo" class="logo">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html" class="active">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="projects-section">
+    <h2>More Projects</h2>
+
+    <div class="projects-grid">
+        <!-- Completed Project -->
+        <div class="project">
+            <img src="assets/images/project1.jpg" alt="Industrial Warehouse">
+            <div class="project-info">
+                <h3>Industrial Warehouse</h3>
+                <p>Completed large warehouse in Area 36 for logistics.</p>
+                <span class="status completed">Completed</span>
+            </div>
+        </div>
+
+        <!-- Ongoing Project with Modal -->
+        <div class="project" data-project="school">
+            <img src="assets/images/project2.jpg" alt="School Renovation">
+            <div class="project-info">
+                <h3>School Renovation</h3>
+                <p>Ongoing project improving facilities in local schools.</p>
+                <span class="status ongoing">Ongoing</span>
+            </div>
+        </div>
+
+        <!-- Future Project with Modal -->
+        <div class="project" data-project="community">
+            <img src="assets/images/project3.jpg" alt="Community Center">
+            <div class="project-info">
+                <h3>Community Center</h3>
+                <p>Future community center planned for public events.</p>
+                <span class="status future">Future</span>
+            </div>
+        </div>
+
+        <!-- Add more projects here as needed -->
+    </div>
+</section>
+
+<!-- Modals for Ongoing & Future Projects -->
+<div id="modal-school" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>School Renovation</h3>
+        <p>This ongoing project focuses on improving classrooms, building new laboratories, and updating library facilities. Expected completion: December 2025.</p>
+    </div>
+</div>
+
+<div id="modal-community" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3>Community Center</h3>
+        <p>This future project aims to build a multi-purpose community center for events, meetings, and workshops. Planned start: July 2026.</p>
+    </div>
+</div>
+
+<footer>
+    <footer>
+        <div class="footer-container">
+            <p>📞 +265 999 952 722 | +265 993 523 172</p>
+            <p>📍 123 Tsogalani Street, Lilongwe, Malawi</p>
+            <p>✉️ tsogolaniestateagent@gmail.com</p>
+            <p>&copy; 2025 Tsogalani Investment & Estate Agents</p>
+            <p>
+                Follow us: 
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </p>
+        </div>
+    </footer>
+    
+</footer>
+
+<!-- JavaScript for Modals -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const projects = document.querySelectorAll(".project[data-project]");
+    
+    projects.forEach(project => {
+        project.addEventListener("click", () => {
+            const projectId = project.getAttribute("data-project");
+            const modal = document.getElementById(`modal-${projectId}`);
+            if(modal) modal.style.display = "block";
+        });
+    });
+
+    const closes = document.querySelectorAll(".close");
+    closes.forEach(btn => {
+        btn.addEventListener("click", () => {
+            btn.closest(".modal").style.display = "none";
+        });
+    });
+
+    window.addEventListener("click", e => {
+        if(e.target.classList.contains("modal")) {
+            e.target.style.display = "none";
+        }
+    });
+});
+</script>
+
+</body>
+</html>

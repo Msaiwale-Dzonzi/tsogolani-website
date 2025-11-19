@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us - Tsogolani Investment</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/main.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; background:#f9f9f9; }
+        header { text-align:center; padding:20px; background:#003366; color:white; }
+        header nav a { color:white; margin:0 15px; text-decoration:none; font-weight:bold; }
+        header nav a.active { text-decoration: underline; }
+
+        .content { padding: 40px 5%; }
+
+        /* Section Titles */
+        .section-title { text-align:center; margin-top:40px; margin-bottom:20px; color:#003366; }
+
+        /* About Cards & Grid */
+        .about-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:25px; margin-top:30px; }
+        .about-card { background:#ffffff; padding:20px; border-radius:12px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.08); transition:0.3s ease-in-out; position:relative; overflow:hidden; }
+        .about-card:hover { transform:translateY(-5px); box-shadow:0 6px 16px rgba(0,0,0,0.12); }
+        .about-card i { font-size:45px; color:#0a5c36; margin-bottom:15px; }
+        .about-card h3 { margin-bottom:10px; color:#000; }
+        .about-card p { color:#444; line-height:1.6; }
+
+        /* Interactive Team */
+        .team-card { position:relative; cursor:pointer; transition: transform 0.3s; overflow:hidden; }
+        .team-card:hover .overlay { transform: translateY(0); opacity:1; }
+        .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,92,54,0.9); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:15px; border-radius:12px; opacity:0; transform: translateY(100%); transition: all 0.4s ease-in-out; }
+        .overlay h4 { margin:5px 0; font-size:18px; }
+        .overlay p { font-size:14px; line-height:1.4; }
+
+        /* Giving Back Section */
+        .giving-back { background:#e6f2f0; padding:30px; border-radius:12px; margin-top:50px; }
+        .giving-back h2 { color:#003366; text-align:center; margin-bottom:20px; }
+        .initiative-list { max-width:900px; margin:20px auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+        .initiative-item { background:white; border-radius:10px; padding:15px 20px; box-shadow:0 4px 8px rgba(0,0,0,0.1); text-align:center; }
+        .initiative-item img { width:100%; height:200px; object-fit:cover; border-radius:10px; margin-bottom:10px; cursor:pointer; transition:0.3s; }
+        .initiative-item img:hover { transform:scale(1.05); }
+        .initiative-item h4 { margin:0; color:#003366; }
+        .initiative-item span { font-size:14px; color:#777; display:block; margin-bottom:5px; }
+        .initiative-content { display:none; margin-top:10px; color:#444; line-height:1.5; }
+        .read-more-btn { color:#003366; cursor:pointer; font-weight:bold; text-decoration:underline; margin-top:10px; display:inline-block; }
+
+        /* Lightbox */
+        .lightbox { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition: opacity 0.3s ease; z-index:10000; }
+        .lightbox img { max-width:90%; max-height:90%; border-radius:10px; }
+        .lightbox.visible { opacity:1; visibility:visible; }
+        .lightbox-close { position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer; }
+
+        footer { background:#003366; color:white; text-align:center; padding:20px; margin-top:40px; }
+        footer a { color:white; margin:0 5px; text-decoration:none; }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>About Us</h1>
+    <img src="assets/images/logo.png" alt="Tsogolani Logo" class="logo">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section class="content">
+
+    <!-- Our Journey -->
+    <div class="our-journey">
+        <h2 class="section-title">Our Journey: From Vision to Reality</h2>
+        <p style="max-width:900px; margin:0 auto; text-align:center; font-size:16px;">
+            Tsogolani Investment & Estate Agency was established to provide comprehensive real estate, 
+            construction, and property management solutions. Since our inception, we have focused on delivering quality, professionalism, 
+            and innovation to every client. Over the years, we have expanded our services and built a team of highly skilled professionals 
+            committed to excellence in every project.
+        </p>
+    </div>
+
+    <!-- Team Section -->
+    <div class="team">
+        <h2 class="section-title">Meet Our Team of Experts</h2>
+        <p style="text-align:center; max-width:900px; margin:0 auto;">
+            Our success is driven by a dedicated team of qualified professionals with strong academic backgrounds 
+            and proven experience in real estate, engineering, construction, and business development.
+        </p>
+
+        <div class="about-grid">
+
+            <!-- Team Member -->
+            <div class="about-card team-card">
+                <i class="fas fa-user-tie"></i>
+                <h3>Mr. John Banda</h3>
+                <p><strong>Role:</strong> Managing Director</p>
+                <p><strong>Education:</strong> Bachelor’s in Business Administration, MBA</p>
+                <div class="overlay">
+                    <h4>Achievements</h4>
+                    <p>Over 15 years of experience in real estate and investment management. Led successful multi-million projects and strategic partnerships.</p>
+                </div>
+            </div>
+
+            <div class="about-card team-card">
+                <i class="fas fa-users-cog"></i>
+                <h3>Eng. Grace Mwale</h3>
+                <p><strong>Role:</strong> Construction & Engineering Lead</p>
+                <p><strong>Education:</strong> Bachelor of Civil Engineering</p>
+                <div class="overlay">
+                    <h4>Achievements</h4>
+                    <p>Expert in large-scale civil projects, bridges, and roads. Known for innovative designs and strict adherence to quality standards.</p>
+                </div>
+            </div>
+
+            <div class="about-card team-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Mr. Peter Chirwa</h3>
+                <p><strong>Role:</strong> Property & Business Development Manager</p>
+                <p><strong>Education:</strong> BSc Real Estate, Diploma Project Management</p>
+                <div class="overlay">
+                    <h4>Achievements</h4>
+                    <p>Specializes in investment advisory and property development. Managed high-value projects increasing company portfolio by 40%.</p>
+                </div>
+            </div>
+
+            <div class="about-card team-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Ms. Faith Phiri</h3>
+                <p><strong>Role:</strong> Finance & Administration Officer</p>
+                <p><strong>Education:</strong> Bachelor of Accounting, Advanced Diploma in Finance</p>
+                <div class="overlay">
+                    <h4>Achievements</h4>
+                    <p>Experienced in financial planning, audit compliance, and operational administration ensuring smooth company operations.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Vision Section -->
+    <div class="about-grid" style="margin-top:50px;">
+        <div class="about-card">
+            <i class="fas fa-eye"></i>
+            <h3>Vision</h3>
+            <p>To be leaders in Real Estate, Construction, and Engineering by consistently exceeding customer expectations with quality and innovation.</p>
+        </div>
+    </div>
+
+    <!-- Core Principles Section -->
+    <h2 class="section-title">Core Principles</h2>
+    <p style="text-align:center; max-width:900px; margin:0 auto; margin-bottom:20px;">
+        Values that shape our business.
+    </p>
+    <div class="about-grid">
+        <div class="about-card">
+            <i class="fas fa-bullseye"></i>
+            <h3>Our Objectives</h3>
+            <p>To provide a one-stop solution for Real Estate, Construction, and Engineering needs—serving end-users, investors, and developers with excellence.</p>
+            <p>We deliver Leasing, Sales, and Property Management services at the highest standards.</p>
+        </div>
+        <div class="about-card">
+            <i class="fas fa-flag-checkered"></i>
+            <h3>Mission Statement</h3>
+            <p>To proactively pursue business through innovation, provide exceptional customer service, and build lifelong relationships with our clients and communities.</p>
+        </div>
+        <div class="about-card">
+            <i class="fas fa-handshake"></i>
+            <h3>Core Values</h3>
+            <p>Integrity, care for all, excellence, professionalism, and continuous improvement in the quality of our services.</p>
+        </div>
+        <div class="about-card">
+            <i class="fas fa-building"></i>
+            <h3>Who We Are</h3>
+            <p>Tsogolani Investment & Estate Agents is a Malawian-owned company specializing in construction, property management, and real estate services with a focus on professionalism and quality delivery.</p>
+        </div>
+    </div>
+
+    <!-- Giving Back Section -->
+    <div class="giving-back">
+        <h2>Giving Back</h2>
+        <p>Empowering our communities through active engagement.</p>
+
+        <div class="initiative-list">
+            <div class="initiative-item">
+                <img src="assets/images/giving-back1.jpg" alt="Supporting Local Initiatives">
+                <h4>Supporting Local Initiatives</h4>
+                <span>November 19, 2025</span>
+                <p class="initiative-content">We actively participate in community programs and provide support for local development projects, including youth empowerment, local school programs, and neighborhood improvement initiatives.</p>
+                <span class="read-more-btn">Read More</span>
+            </div>
+            <div class="initiative-item">
+                <img src="assets/images/giving-back2.jpg" alt="Sustainability Efforts">
+                <h4>Sustainability Efforts</h4>
+                <span>November 19, 2025</span>
+                <p class="initiative-content">Our company implements eco-friendly practices in construction and promotes sustainable business solutions. We focus on energy-efficient designs, recycling materials, and educating communities on sustainable practices.</p>
+                <span class="read-more-btn">Read More</span>
+            </div>
+            <div class="initiative-item">
+                <img src="assets/images/giving-back3.jpg" alt="Community Engagement">
+                <h4>Community Engagement</h4>
+                <span>November 19, 2025</span>
+                <p class="initiative-content">We engage with local communities to improve livelihoods, support health and education programs, and encourage youth development initiatives to create long-term positive impacts.</p>
+                <span class="read-more-btn">Read More</span>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="Lightbox Image" id="lightboxImg">
+</div>
+
+<footer>
+    <div class="footer-container">
+        <p>📞 +265 999 952 722 | +265 993 523 172</p>
+        <p>📍 123 Tsogalani Street, Lilongwe, Malawi</p>
+        <p>✉️ tsogolaniestateagent@gmail.com</p>
+        <p>&copy; 2025 Tsogalani Investment & Estate Agents</p>
+        <p>
+            Follow us: 
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </p>
+    </div>
+</footer>
+
+<script>
+    // Read More functionality
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const content = this.previousElementSibling;
+            if(content.style.display === "block") {
+                content.style.display = "none";
+                this.textContent = "Read More";
+            } else {
+                content.style.display = "block";
+                this.textContent = "Read Less";
+            }
+        });
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxClose = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.initiative-item img').forEach(img => {
+        img.addEventListener('click', function() {
+            lightbox.classList.add('visible');
+            lightboxImg.src = this.src;
+        });
+    });
+
+    lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('visible');
+    });
+
+    lightbox.addEventListener('click', e => {
+        if(e.target === lightbox) {
+            lightbox.classList.remove('visible');
+        }
+    });
+</script>
+
+</body>
+</html>

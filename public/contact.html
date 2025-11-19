@@ -1,0 +1,185 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us - Tsogolani Investment</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Simple message styling */
+        .form-message {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        .form-message.success {
+            color: green;
+        }
+        .form-message.error {
+            color: red;
+        }
+
+        /* Basic form styling */
+        form input, form textarea, form button {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        form button {
+            background: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        form button:hover {
+            background: #0055aa;
+        }
+
+        .content h2 {
+            margin-bottom: 15px;
+            color: #003366;
+        }
+
+        .contact-info p {
+            margin: 5px 0;
+        }
+        .contact-section { padding:40px 5%; max-width:1200px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; }
+
+.contact-box { background:white; padding:25px; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+
+.contact-box h2 { color:#003366; margin-bottom:15px; }
+.contact-box p { margin:5px 0; }
+.contact-box iframe { border:0; border-radius:12px; width:100%; height:250px; }
+
+.contact-box form { margin-top:10px; display:flex; flex-direction:column; gap:10px; }
+.contact-box form input, .contact-box form textarea, .contact-box form button { font-size:14px; padding:10px; border-radius:8px; border:1px solid #ccc; width:100%; }
+.contact-box form button { background:#003366; color:white; border:none; cursor:pointer; }
+.contact-box form button:hover { background:#0055aa; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Contact Us</h1>
+    <img src="assets/images/logo.png" alt="Tsogolani Logo" class="logo">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" class="active">Contact</a>
+    </nav>
+</header>
+
+<section class="content">
+    <h2>Get In Touch</h2>
+    <div class="contact-info">
+        <p><strong>Phone:</strong> +265 999 952 722 | +265 993 523 172</p>
+        <p><strong>Email:</strong> tsogolaniestateagent@gmail.com</p>
+        <p><strong>Location:</strong> 123 Tsogalani Street, Lilongwe, Malawi</p>
+        <p><strong>WhatsApp:</strong> +265 999 952 722</p>
+        <p><strong>Office Hours:</strong> Mon-Fri 8:00 AM – 5:00 PM</p>
+        <p><strong>Follow us on Social Media:</strong> 
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </p>
+    </div>
+
+    <!-- Contact Form using Formspree -->
+    <form id="contactForm" action="https://formspree.io/f/xovyboao" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="tel" name="phone" placeholder="Your Phone Number" pattern="[0-9+]{8,15}" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+        <div id="formMessage" class="form-message"></div>
+    </form>
+    <div class="contact-box">
+        <h2>Our Location</h2>
+        <p>📍 123 Tsogalani Street, Lilongwe, Malawi</p>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.0000!2d33.800000!3d-13.983333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDU5JzAwLjAiTiAzM8KwNDgnMjAuMCJF!5e0!3m2!1sen!2smw!4v1699999999999!5m2!1sen!2smw" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+       <!-- Operating Hours -->
+  <div class="contact-box">
+    <h2>Operating Hours</h2>
+    <p>🕘 <strong>Monday - Friday:</strong> 08:00 AM - 06:00 PM</p>
+    <p>🕘 <strong>Saturday:</strong> 09:00 AM - 02:00 PM</p>
+    <p>🕘 <strong>Sunday:</strong> Closed</p>
+  </div>
+  <div class="contact-box">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Stay updated with the latest news and insights in real estate.</p>
+    <form id="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="newsletter-msg" style="margin-top:10px; color:green; display:none;">Thank you for subscribing!</p>
+  </div>
+</section>
+
+<!-- Footer updated to match homepage -->
+<footer>
+    <div class="footer-container">
+        <p>📞 +265 999 952 722 | +265 993 523 172</p>
+        <p>📍 123 Tsogalani Street, Lilongwe, Malawi</p>
+        <p>✉️ tsogolaniestateagent@gmail.com</p>
+        <p>Follow us: 
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        </p>
+        <p>&copy; 2025 Tsogalani Investment & Estate Agents</p>
+    </div>
+</footer>
+
+<script>
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent page reload
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                formMessage.textContent = "Your message has been sent successfully!";
+                formMessage.className = "form-message success";
+                formMessage.style.display = "block";
+                form.reset(); // Clear the form
+            } else {
+                response.json().then(data => {
+                    formMessage.textContent = data.error || "Oops! There was a problem sending your message.";
+                    formMessage.className = "form-message error";
+                    formMessage.style.display = "block";
+                })
+            }
+        }).catch(error => {
+            formMessage.textContent = "Oops! There was a problem sending your message.";
+            formMessage.className = "form-message error";
+            formMessage.style.display = "block";
+        });
+
+    });
+</script>
+
+</body>
+</html>

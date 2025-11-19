@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin - News Management</title>
+<style>
+body { font-family: Arial; margin:20px; }
+h1 { color:#003366; }
+input, textarea { width:100%; padding:8px; margin:5px 0 10px; }
+button { padding:10px 20px; background:#003366; color:white; border:none; border-radius:6px; cursor:pointer; margin-top:10px; }
+button:hover { background:#0055aa; }
+.news-item { border:1px solid #ccc; padding:10px; margin-bottom:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; }
+.news-item img, .news-item video { width:100px; height:70px; object-fit:cover; margin-right:10px; }
+.news-list { margin-top:20px; }
+#news-form { display:none; margin-top:20px; }
+#login-form { margin-top:20px; }
+</style>
+</head>
+<body>
+
+<h1>Admin Panel</h1>
+
+<div id="login-form">
+<label>Username:</label>
+<input type="text" id="username">
+<label>Password:</label>
+<input type="password" id="password">
+<button id="login-btn">Login</button>
+</div>
+
+<div id="news-form">
+<h2>Manage News</h2>
+
+<label>News Title:</label>
+<input type="text" id="title">
+
+<label>News Description:</label>
+<textarea id="desc"></textarea>
+
+<label>Images (multiple):</label>
+<input type="file" id="images" multiple accept="image/*">
+
+<label>Videos (multiple):</label>
+<input type="file" id="videos" multiple accept="video/*">
+
+<button id="add-btn">Add News</button>
+<button id="clear-btn">Clear All News</button>
+
+<div class="news-list" id="news-list"></div>
+<button id="logout-btn">Logout</button>
+</div>
+
+<script>
+const loginForm = document.getElementById('login-form');
+const newsForm = document.getElementById('news-form');
+
+async function login(){
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const res = await fetch('/admin/login', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({username,password})
+    });
+    const data = await res.json();
+    if(data.success){
+        loginForm.style.display='none';
+        newsForm.style.display='block';
+        renderList();
+    } else { alert('Invalid credentials'); }
+}
+
+async function logout(){
+    await fetch('/admin/logout',{method:'POST'});
+    loginForm.style.display='block';
+    newsForm.style.display='none';
+}
+
+async function fetchNews(){
+    const res = await fetch('/api/news');
+    return await res.json();
+}
+
+async function renderList(){
+    const news = await fetchNews();
+    const list = document.getElementById('news-list');
+    list.innerHTML='';
+    news.forEach((item,index)=>{
+        const div = document.createElement('div');
+        div.className='news-item';
+        div.innerHTML=`
+        <div>
+        <strong>${item.title}</strong>
+        <p>${item.desc.substring(0,50)}${item.desc.length>50?'...':''}</p>
+        </div>
+        <div>
+        <button onclick="deleteNews(${index})">Delete</button>
+        </div>
+        `;
+        list.appendChild(div);
+    });
+}
+
+async function addNews(){
+    const title = document.getElementById('title').value;
+    const desc = document.getElementById('desc').value;
+    const images = document.getElementById('images').files;
+    const videos = document.getElementById('videos').files;
+
+    if(!title || !desc){ alert('Title and Description required'); return; }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('desc', desc);
+    for(let i=0;i<images.length;i++) formData.append('images', images[i]);
+    for(let i=0;i<videos.length;i++) formData.append('videos', videos[i]);
+
+    await fetch('/api/news',{method:'POST', body: formData});
+    document.getElementById('title').value='';
+    document.getElementById('desc').value='';
+    document.getElementById('images').value='';
+    document.getElementById('videos').value='';
+    renderList();
+}
+
+async function deleteNews(index){
+    if(!confirm('Delete this news?')) return;
+    await fetch(`/api/news/${index}`,{method:'DELETE'});
+    renderList();
+}
+
+document.getElementById('login-btn').addEventListener('click', login);
+document.getElementById('logout-btn').addEventListener('click', logout);
+document.getElementById('add-btn').addEventListener('click', addNews);
+document.getElementById('clear-btn').addEventListener('click', async ()=>{
+    if(confirm('Clear all news?')){
+        await fetch('/api/news',{method:'DELETE'});
+        renderList();
+    }
+});
+</script>
+
+</body>
+</html>

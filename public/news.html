@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>News & Events - Tsogolani Investment</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#f7f7f7;}
+header { background:#003366; color:white; padding:20px; text-align:center; }
+header nav a { color:white; margin:0 10px; text-decoration:none; font-weight:bold; }
+header nav a.active { text-decoration:underline; }
+
+.news-section { padding:40px 5%; }
+.news-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:20px; }
+.news-card { background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); overflow:hidden; transition:transform 0.3s; cursor:pointer;}
+.news-card:hover { transform:translateY(-5px); box-shadow:0 8px 20px rgba(0,0,0,0.15); }
+.news-card-content { padding:20px; }
+.news-card h3 { color:#003366; margin-top:0; }
+.news-card p { color:#555; }
+.news-card a { color:#0078ff; text-decoration:none; font-weight:bold; }
+.news-card a:hover { text-decoration:underline; }
+
+/* Admin Panel */
+#admin-panel { background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:20px; margin-bottom:40px; }
+#admin-panel h2 { margin-top:0; color:#003366; }
+#admin-panel input, #admin-panel textarea { width:100%; padding:8px; margin:5px 0 15px 0; border-radius:6px; border:1px solid #ccc; }
+#admin-panel button { padding:10px 20px; border:none; border-radius:8px; background:#003366; color:white; cursor:pointer; margin-right:10px; }
+#admin-panel button:hover { background:#0055aa; }
+.news-list { margin-top:20px; }
+.news-list div { padding:10px; border-bottom:1px solid #ddd; display:flex; justify-content:space-between; align-items:center; }
+.news-list button { background:red; padding:5px 10px; border-radius:6px; font-size:12px; }
+
+footer { background:#003366; color:white; padding:20px; text-align:center; margin-top:40px; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Tsogolani Investment & Estate Agents</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+        <a href="news.html" class="active">News & Events</a>
+    </nav>
+</header>
+
+<!-- Admin Panel -->
+<section id="admin-panel">
+    <h2>News Admin Panel</h2>
+    <input type="text" id="news-title" placeholder="News Title">
+    <textarea id="news-desc" placeholder="News Description"></textarea>
+    <label>Upload Images (multiple):</label>
+    <input type="file" id="news-images" multiple accept="image/*">
+    <label>Upload Videos (multiple):</label>
+    <input type="file" id="news-videos" multiple accept="video/*">
+    <br>
+    <button id="add-news-btn">Add News</button>
+    <button id="clear-news-btn">Clear All News</button>
+
+    <div class="news-list" id="news-list">
+        <!-- Existing news will appear here -->
+    </div>
+</section>
+
+<!-- News Grid -->
+<section class="news-section">
+    <h2>Latest News & Events</h2>
+    <div class="news-grid" id="news-grid">
+        <!-- Dynamic news cards will be inserted here -->
+    </div>
+</section>
+
+<footer>
+    <p>© 2025 Tsogolani Investment & Estate Agents</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// Admin login prompt
+let isAdmin = false;
+async function adminLogin() {
+    const username = prompt("Enter admin username:");
+    const password = prompt("Enter admin password:");
+    const res = await fetch('/admin/login', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({username,password})
+    });
+    const data = await res.json();
+    if(data.success) {
+        isAdmin = true;
+        alert('Admin login successful!');
+        loadAdminNews();
+    } else {
+        alert('Invalid credentials. Admin panel disabled.');
+    }
+}
+adminLogin();
+
+// Add news via backend
+document.getElementById('add-news-btn').addEventListener('click', async () => {
+    if(!isAdmin) return alert('You must be admin to upload news');
+
+    const title = document.getElementById('news-title').value.trim();
+    const desc = document.getElementById('news-desc').value.trim();
+    const images = document.getElementById('news-images').files;
+    const videos = document.getElementById('news-videos').files;
+
+    if(!title || !desc) return alert('Title and description are required');
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('desc', desc);
+    for(let i=0;i<images.length;i++) formData.append('images', images[i]);
+    for(let i=0;i<videos.length;i++) formData.append('videos', videos[i]);
+
+    const res = await fetch('/admin/news', { method:'POST', body:formData });
+    const data = await res.json();
+    if(data.success) {
+        alert('News uploaded successfully');
+        document.getElementById('news-title').value='';
+        document.getElementById('news-desc').value='';
+        document.getElementById('news-images').value='';
+        document.getElementById('news-videos').value='';
+        loadNews();
+        loadAdminNews();
+    } else alert('Failed to upload news');
+});
+
+// Clear all news (backend)
+document.getElementById('clear-news-btn').addEventListener('click', async () => {
+    if(!isAdmin) return alert('You must be admin');
+    if(!confirm('Clear all news?')) return;
+    const newsRes = await fetch('/api/news'); 
+    const newsArr = await newsRes.json();
+    for(let i=newsArr.length-1;i>=0;i--){
+        await fetch('/admin/news/'+i,{method:'DELETE'});
+    }
+    loadNews();
+    loadAdminNews();
+});
+
+// Load news for homepage
+async function loadNews() {
+    try {
+        const res = await fetch('/api/news');
+        const news = await res.json();
+        const grid = document.getElementById('news-grid');
+        grid.innerHTML = '';
+        news.forEach((item,index)=>{
+            const card = document.createElement('div');
+            card.className='news-card';
+            const firstImage = item.images.length?item.images[0]:'assets/images/placeholder.jpg';
+            card.innerHTML=`<h3>${item.title}</h3>
+                <img src="${firstImage}" style="width:100%;border-radius:8px;margin:10px 0;">
+                <p>${item.desc}</p>
+            `;
+            grid.appendChild(card);
+        });
+    } catch(e){ console.error(e);}
+}
+
+// Load news for admin list
+async function loadAdminNews() {
+    if(!isAdmin) return;
+    const res = await fetch('/api/news');
+    const news = await res.json();
+    const list = document.getElementById('news-list');
+    list.innerHTML='';
+    news.forEach((item,index)=>{
+        const div = document.createElement('div');
+        div.innerHTML=`<span>${item.title}</span> <button onclick="deleteNews(${index})">Delete</button>`;
+        list.appendChild(div);
+    });
+}
+
+// Delete news
+async function deleteNews(index){
+    if(!confirm('Delete this news?')) return;
+    await fetch('/admin/news/'+index,{method:'DELETE'});
+    loadNews();
+    loadAdminNews();
+}
+
+// Initial load
+loadNews();
+
+</script>
+</body>
+</html>
